@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635370281085",
+    "project_id": "studyapp-cbda5",
+    "storage_bucket": "studyapp-cbda5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635370281085:android:a1cdc598601e2ea3127914",
+        "android_client_info": {
+          "package_name": "com.example.studyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiGOn1Z3LkTftNMk01GXLWfo1f8Hrz_gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

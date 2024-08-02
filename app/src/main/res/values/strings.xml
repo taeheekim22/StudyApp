@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">StudyApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="action_home">홈</string>
+    <string name="action_goal">목표</string>
+    <string name="action_info">정보</string>
+    <string name="action_chat">채팅</string>
+    <string name="action_set">설정</string>
+
+    <string-array name="departments_array">
+        <item>정보보호학과</item>
+        <item>소프트웨어융합학과</item>
+    </string-array>
+</resources>

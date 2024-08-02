@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- '정보'에 대한 체크박스 옵션들 -->
+    <string-array name="정보보호학과">
+        <item>정보</item>
+        <item>정보보호세미나</item>
+    </string-array>
+
+    <!-- '소융'에 대한 체크박스 옵션들 -->
+    <string-array name="소프트웨어융합학과">
+        <item>소융</item>
+        <item>소프트웨어test</item>
+    </string-array>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GoalActivity">
+
+    <TextView
+        android:id="@+id/tv_goal_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="오늘 공부 목표 시간"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/et_goal_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:hint="HH"
+            android:inputType="number"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/textColorPrimary"
+            android:maxLength="2"
+            android:ems="2"/>
+
+        <EditText
+            android:id="@+id/et_goal_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="MM"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            android:textColor="@color/textColorPrimary"
+            android:maxLength="2"
+            android:ems="2"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To-Do List"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/btn_add_todo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#E4A5B3"
+        android:text="+"
+        android:textColor="@color/colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/todo_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long-Term Plans"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/et_long_term_plans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your long-term plans here"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:minHeight="200dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/textColorPrimary"/>
+
+</LinearLayout>
