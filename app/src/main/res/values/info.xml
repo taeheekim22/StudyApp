@@ -2,8 +2,12 @@
 <resources>
     <!-- '정보'에 대한 체크박스 옵션들 -->
     <string-array name="정보보호학과">
-        <item>정보</item>
-        <item>정보보호세미나</item>
+        <item>인턴 트랙 OR 자격증 트랙</item>
+        <item>Guru 1 이수</item>
+        <item>Guru 2 이수</item>
+        <item>소프트웨어개발 실무영어 1 이수</item>
+        <item>소프트웨어개발 실무영어 2 이수</item>
+        <item>1인 1 SW 지적재산권 취득(SW등록/ 논문/ 특허출원)</item>
     </string-array>
 
     <!-- '소융'에 대한 체크박스 옵션들 -->

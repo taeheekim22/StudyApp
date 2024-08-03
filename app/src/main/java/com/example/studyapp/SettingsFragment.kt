@@ -1,6 +1,7 @@
 package com.example.studyapp
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ class SettingsFragment : Fragment() {
     lateinit var tvName: TextView
     lateinit var tvDepartment: TextView
     lateinit var btnUpdateInfo: Button
+    lateinit var btnLogout:Button
     lateinit var auth: FirebaseAuth
     lateinit var db:FirebaseFirestore
 
@@ -33,9 +35,12 @@ class SettingsFragment : Fragment() {
         tvName = view.findViewById(R.id.tvName)
         tvDepartment = view.findViewById(R.id.tvDepartment)
         btnUpdateInfo=view.findViewById(R.id.btnUpdateInfo)
+        btnLogout=view.findViewById(R.id.btnLogout)
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
+        checkLoginStatus()
 
         val user = auth.currentUser
         user?.let {
@@ -54,6 +59,18 @@ class SettingsFragment : Fragment() {
 
         btnUpdateInfo.setOnClickListener{
             showUpdateDialog()
+        }
+
+        btnLogout.setOnClickListener{
+            logout()
+        }
+    }
+
+    private fun checkLoginStatus(){
+        if(auth.currentUser==null) {
+            val intent=Intent(requireActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
@@ -151,6 +168,13 @@ class SettingsFragment : Fragment() {
                     // Handle failure
                 }
         }
+    }
+
+    private fun logout() {
+        auth.signOut()
+        val intent= Intent(requireActivity(), LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity()
     }
 
 
