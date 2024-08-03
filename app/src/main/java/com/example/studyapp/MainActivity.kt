@@ -1,11 +1,13 @@
 package com.example.studyapp
 
-import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,28 +18,23 @@ class MainActivity : AppCompatActivity() {
     lateinit var chatFragment: ChatFragment
     lateinit var settingsFragment: SettingsFragment
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavi)
 
-        //전달된 username 저장
-        val username=intent.getStringExtra("username")
-        if(username!=null){
-            val sharedPreferences:SharedPreferences=getSharedPreferences("user_prefs", MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
-            editor.putString("logged_in_username", username)
-            editor.apply()
-        }
+        // 사용자 인증 상태 확인
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        val user: FirebaseUser? = auth.currentUser
+        val username = intent.getStringExtra("username")
 
         // 프래그먼트 초기화
         homeFragment = HomeFragment()
         goalFragment = GoalFragment()
         infoFragment = InfoFragment()
         chatFragment = ChatFragment()
-        settingsFragment = SettingsFragment.newInstance(username ?: "example_username")
+        settingsFragment = SettingsFragment()
 
         // (기존)처음 시작 화면을 HomeFragment로 설정
         if (savedInstanceState == null) {
@@ -65,11 +62,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_set -> {
-                    val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs",
-                        MODE_PRIVATE)
-                    val username = sharedPreferences.getString("logged_in_username",
-                        "example_username")
-                    switchFragment(SettingsFragment.newInstance(username!!))
+                    switchFragment(settingsFragment)
                     true
                 }
                 else -> false

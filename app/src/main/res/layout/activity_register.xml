@@ -46,11 +46,11 @@
                     android:layout_gravity="top|left"
                     android:layout_marginBottom="34dp"
                     android:layout_marginLeft="8dp"
-                    android:text="아이디"
+                    android:text="이메일"
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/etUsername"
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"

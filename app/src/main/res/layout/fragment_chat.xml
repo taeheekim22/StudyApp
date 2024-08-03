@@ -4,32 +4,26 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etPostTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Post Title" />
-
-    <EditText
-        android:id="@+id/etPostContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPostTitle"
-        android:hint="Post Content"
-        android:layout_marginTop="8dp" />
-
-    <Button
-        android:id="@+id/btnPost"
+    <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etPostContent"
-        android:text="Post"
-        android:layout_marginTop="16dp" />
+        android:text="자유게시판"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnNewPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:text="+ 새글"
+        android:backgroundTint="#E4A5B3"
+        android:layout_marginTop="8dp"/>
 
     <ListView
         android:id="@+id/lvPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnPost"
+        android:layout_below="@id/btnNewPost"
         android:layout_marginTop="16dp" />
 </RelativeLayout>

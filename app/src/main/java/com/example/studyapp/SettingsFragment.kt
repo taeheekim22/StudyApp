@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SettingsFragment : Fragment() {
-    lateinit var tvUsername: TextView
+    lateinit var tvEmail: TextView
     lateinit var tvName: TextView
     lateinit var tvDepartment: TextView
+    lateinit var auth: FirebaseAuth
+    lateinit var db:FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,27 +28,26 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvUsername = view.findViewById(R.id.tvUsername)
+        tvEmail = view.findViewById(R.id.tvEmail)
         tvName = view.findViewById(R.id.tvName)
         tvDepartment = view.findViewById(R.id.tvDepartment)
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-        val sharedPreferences: SharedPreferences=requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE)
-        val username=arguments?.getString("username")?:"없음"
-        val name=sharedPreferences.getString("${username}_name", "없음")
-        val department=sharedPreferences.getString("${username}_department", "없음")
-
-        tvUsername.text = "아이디: $username"
-        tvName.text = "이름: $name"
-        tvDepartment.text = "학과: $department"
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(username: String) =
-            SettingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString("username", username)
+        val user = auth.currentUser
+        user?.let {
+            tvEmail.text = "이메일: ${it.email}"
+            db.collection("users").document(it.uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        tvName.text = "이름: ${document.getString("name")}"
+                        tvDepartment.text = "학과: ${document.getString("department")}"
+                    }
                 }
-            }
+                .addOnFailureListener {
+                    // Handle failure
+                }
+        }
+
     }
 }

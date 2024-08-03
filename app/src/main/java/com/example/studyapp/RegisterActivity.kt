@@ -4,17 +4,19 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.util.Log
+import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var etUsername: EditText
+    lateinit var etEmail: EditText
     lateinit var etPassword: EditText
     lateinit var etName: EditText
     lateinit var spinnerDepartment: Spinner
     lateinit var btnRegister: Button
+    lateinit var auth: FirebaseAuth
+    lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +34,13 @@ class RegisterActivity : AppCompatActivity() {
         spinner.adapter = adapter
 
 
-        etUsername=findViewById(R.id.etUsername)
+        etEmail=findViewById(R.id.etEmail)
         etPassword=findViewById(R.id.etPassword)
         etName=findViewById(R.id.etName)
         spinnerDepartment=findViewById(R.id.spinnerDepartment)
         btnRegister=findViewById(R.id.btnRegister)
+        auth= FirebaseAuth.getInstance()
+        db= FirebaseFirestore.getInstance()
 
         btnRegister.setOnClickListener{
             register()
@@ -44,20 +48,39 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register() {
-        val username=etUsername.text.toString()
+        val email = etEmail.text.toString()
         val password = etPassword.text.toString()
         val name = etName.text.toString()
         val department = spinnerDepartment.selectedItem.toString()
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString(username, password)
-        editor.putString("${username}_name", name)
-        editor.putString("${username}_department", department)
-        editor.apply()
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    val userInfo = hashMapOf(
+                        "name" to name,
+                        "department" to department
+                    )
+                    user?.let {
+                        db.collection("users").document(it.uid)
+                            .set(userInfo)
+                            .addOnSuccessListener {
+                                showToast("회원가입 성공")
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                            }
+                            .addOnFailureListener {
+                                showToast("회원정보 저장 실패")
+                            }
+                    }
+                } else {
+                    showToast("회원가입 실패: ${task.exception?.message}")
+                }
+            }
+    }
 
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

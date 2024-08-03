@@ -7,21 +7,24 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var etUsername: EditText
+    lateinit var etEmail: EditText
     lateinit var etPassword: EditText
     lateinit var btnLogin: Button
     lateinit var btnRegister: Button
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        etUsername=findViewById(R.id.etUsername)
+        etEmail=findViewById(R.id.etEmail)
         etPassword=findViewById(R.id.etPassword)
         btnLogin=findViewById(R.id.btnLogin)
         btnRegister=findViewById(R.id.btnRegister)
+        auth= FirebaseAuth.getInstance()
 
         btnLogin.setOnClickListener{
             login()
@@ -35,20 +38,20 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val username = etUsername.text.toString()
+        val username = etEmail.text.toString()
         val password = etPassword.text.toString()
 
-        val savedPassword = sharedPreferences.getString(username, null)
-
-        if (savedPassword != null && savedPassword == password) {
+        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this) {
+                task -> if(task.isSuccessful) {
+            val user = auth.currentUser
             val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("username", username)
-            }
+                putExtra("username", user?.email) }
             startActivity(intent)
-        } else {
-            Toast.makeText(this, "아이디 또는 비밀번호를 다시 확인하세요.", Toast.LENGTH_SHORT).show()
+        } else{
+            Toast.makeText(this, "이메일 또는 비밀번호를 다시 확인하세요.", Toast.LENGTH_SHORT).show()}
         }
     }
-
 }
+
+
+
