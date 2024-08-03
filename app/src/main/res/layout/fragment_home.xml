@@ -6,15 +6,6 @@
     android:layout_height="match_parent">
 
     <!-- 타이머 '분' -->
-
-    <!-- 타이머 '시' -->
-
-    <!-- 타이머 '초' -->
-
-    <!-- 타이머 시작 -->
-
-    <!-- 타이머 정지 = 최종 공부시간으로 시간 넘김 -->
-
     <TextView
         android:id="@+id/minTextView"
         android:layout_width="wrap_content"
@@ -27,6 +18,7 @@
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- 타이머 '시' -->
     <TextView
         android:id="@+id/hourTextView"
         android:layout_width="wrap_content"
@@ -38,6 +30,7 @@
         app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- 타이머 '초' -->
     <TextView
         android:id="@+id/secTextView"
         android:layout_width="wrap_content"
@@ -49,6 +42,7 @@
         app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toEndOf="@+id/minTextView" />
 
+    <!-- 타이머 시작 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startTime"
         android:layout_width="wrap_content"
@@ -63,7 +57,7 @@
         app:layout_constraintVertical_bias="0.88"
         app:srcCompat="@android:drawable/ic_media_play" />
 
-    <!-- 구분선 // 아니면 각각 칸?을 만들어서 넣을지.. -->
+    <!-- 타이머 정지 = 최종 공부시간으로 시간 넘김 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/stopTime"
         android:layout_width="wrap_content"
@@ -78,12 +72,7 @@
         app:layout_constraintVertical_bias="0.878"
         app:srcCompat="@drawable/ic_baseline_stop_24" />
 
-    <!-- 공부 시간 텍스트 -->
-
-    <!-- 최종 공부 시간 '시' -->
-
-    <!-- 최종 공부 시간 '분' -->
-
+    <!-- 구분선 // 아니면 각각 칸?을 만들어서 넣을지.. -->
     <View
         android:id="@+id/divider"
         android:layout_width="wrap_content"
@@ -96,6 +85,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.513" />
 
+    <!-- 공부 시간 텍스트 -->
     <TextView
         android:id="@+id/studyTimeTextView"
         android:layout_width="wrap_content"
@@ -110,6 +100,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.219" />
 
+    <!-- 최종 공부 시간 '시' -->
     <TextView
         android:id="@+id/finalHourtv"
         android:layout_width="wrap_content"
@@ -124,10 +115,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.48" />
 
-    <!-- 최종 공부 시간 '초' -->
-
-    <!-- 최종 공부 시간 초기화 버튼 -->
-
+    <!-- 최종 공부 시간 '분' -->
     <TextView
         android:id="@+id/finalMintv"
         android:layout_width="wrap_content"
@@ -140,6 +128,7 @@
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- 최종 공부 시간 '초' -->
     <TextView
         android:id="@+id/finalSectv"
         android:layout_width="wrap_content"
@@ -152,6 +141,7 @@
         app:layout_constraintHorizontal_bias="0.717"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- 최종 공부 시간 초기화 버튼 -->
     <Button
         android:id="@+id/resetBtn"
         android:layout_width="wrap_content"
