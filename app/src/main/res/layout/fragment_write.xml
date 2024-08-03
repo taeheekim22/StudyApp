@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!--글 쓰기-->
     <TextView
         android:id="@+id/tvWriteTitle"
         android:layout_width="wrap_content"
@@ -13,6 +14,7 @@
         android:textSize="20sp"
         android:gravity="center_horizontal"/>
 
+    <!--글 제목 작성 칸-->
     <EditText
         android:id="@+id/etPostTitle"
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
         android:hint="제목"
         android:layout_marginTop="16dp" />
 
+    <!--글 내용 작성 칸-->
     <EditText
         android:id="@+id/etPostContent"
         android:layout_width="match_parent"
@@ -30,12 +33,13 @@
         android:inputType="textMultiLine"
         android:layout_marginTop="16dp" />
 
+    <!--글 작성 버튼-->
     <Button
         android:id="@+id/btnSubmitPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="완료"
+        android:text="확인"
         android:backgroundTint="#E4A5B3"
         android:layout_marginTop="16dp" />
 </LinearLayout>

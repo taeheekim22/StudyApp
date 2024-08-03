@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!--글 제목-->
     <TextView
         android:id="@+id/tvPostTitle"
         android:layout_width="0dp"
@@ -29,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp" />
 
+    <!--글 내용-->
     <TextView
         android:id="@+id/tvPostContent"
         android:layout_width="0dp"
@@ -53,7 +55,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- 댓글 제목 추가 -->
+    <!-- 댓글 창임을 알림 -->
     <TextView
         android:id="@+id/commentTitle"
         android:layout_width="wrap_content"
@@ -66,6 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp" />
 
+    <!--댓글 모음-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
         android:layout_width="0dp"
@@ -86,6 +89,7 @@
         android:background="@android:color/white"
         android:padding="8dp">
 
+        <!--댓글 작성 칸-->
         <EditText
             android:id="@+id/etComment"
             android:layout_width="0dp"
@@ -93,6 +97,7 @@
             android:layout_weight="1"
             android:hint="댓글을 작성하세요." />
 
+        <!--댓글 확인 버튼-->
         <Button
             android:id="@+id/btnSubmitComment"
             android:layout_width="wrap_content"
@@ -101,6 +106,7 @@
             android:text="확인" />
     </LinearLayout>
 
+    <!--게시글 삭제 버튼-->
     <Button
         android:id="@+id/btnDeletePost"
         android:layout_width="wrap_content"

@@ -9,6 +9,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import android.widget.Toast
+import android.util.Log
 
 class PostAdapter(
     context: Context,
@@ -19,10 +21,15 @@ class PostAdapter(
     private val database: DatabaseReference = FirebaseDatabase.getInstance().reference.child("posts")
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        // null인 경우 view inflate
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_post, parent, false)
 
+        // 현재 위치의 post key 가져오기
         val post = getItem(position)!!
-        val postKey = postKeys[position]  // Assuming you keep track of the keys
+        val postKey = postKeys.getOrNull(position) ?: run {
+            Log.e("PostAdapter", "Invalid position: $position")
+            return view
+        }
 
         val titleTextView: TextView = view.findViewById(R.id.tvPostTitle)
         val contentTextView: TextView = view.findViewById(R.id.tvPostContent)
@@ -31,8 +38,19 @@ class PostAdapter(
         titleTextView.text = post.title
         contentTextView.text = post.content
 
+        // 삭제 버튼 눌렀을 때 게시글 관련 데이터 삭제 리스너
         deleteButton.setOnClickListener {
-            database.child(postKey).removeValue()
+            try {
+                database.child(postKey).removeValue().addOnSuccessListener {
+                    Toast.makeText(context, "Post deleted successfully.", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener { e ->
+                    Toast.makeText(context, "Failed to delete post: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("PostAdapter", "Error deleting post: ${e.message}", e)
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("PostAdapter", "Error handling delete button click: ${e.message}", e)
+            }
         }
 
         return view
