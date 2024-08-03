@@ -14,7 +14,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var spinnerDepartment: Spinner //학과 선택
     private lateinit var btnRegister: Button //회원가입 버튼
     private lateinit var auth: FirebaseAuth //파이어베이스 인증
-    private lateinit var db: FirebaseFirestore //파이어베이스 데이터베이스
+    private lateinit var db: FirebaseFirestore //파이어스토어 데이터베이스
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +80,9 @@ class RegisterActivity : AppCompatActivity() {
                         //회원가입 실패
                         showToast("회원가입에 실패하였습니다: ${task.exception?.message}")
                     }
+                }
+                .addOnFailureListener {
+                    showToast("회원가입 중 오류가 발생했습니다: ${it.message}")
                 }
         } else {
             //모든 필드 입력이 안되었을 때

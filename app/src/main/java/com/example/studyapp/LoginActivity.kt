@@ -43,21 +43,35 @@ class LoginActivity : AppCompatActivity() {
     //로그인 함수
     private fun login() {
         //입력된 메일, 비밀번호 가져오기
-        val username = etEmail.text.toString()
-        val password = etPassword.text.toString()
+        val email = etEmail.text.toString().trim()
+        val password = etPassword.text.toString().trim()
 
-        //파이어베이스 이용하여 이메일, 비밀번호로 로그인
-        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this) {
-                task -> if(task.isSuccessful) {
-                    //로그인 성공할 때
-            val user = auth.currentUser
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("username", user?.email) }
-            startActivity(intent)
-        } else{
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            //파이어베이스 이용하여 이메일, 비밀번호로 로그인
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        //로그인 성공할 때
+                        val user = auth.currentUser
+                        val intent = Intent(this, MainActivity::class.java).apply {
+                            putExtra("username", user?.email)
+                        }
+                        startActivity(intent)
+                    } else {
+                        showToast("이메일 또는 비밀번호를 다시 확인하세요!: ${task.exception?.message}")
+                    }
+                }
+                .addOnFailureListener {
+                    showToast("로그인 중 오류가 발생했습니다!: ${it.message}")
+                }
+        } else {
             //로그인 실패할 때
-            Toast.makeText(this, "이메일 또는 비밀번호를 다시 확인하세요.", Toast.LENGTH_SHORT).show()}
+            showToast("이메일과 비밀번호를 입력하세요!")
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
 
