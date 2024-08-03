@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GoalActivity">
+    tools:context=".GoalFragment">
 
+    <!-- 오늘 공부 목표 시간을 표시하는 텍스트뷰 -->
     <TextView
         android:id="@+id/tv_goal_time"
         android:layout_width="wrap_content"
@@ -16,6 +17,7 @@
         android:text="오늘 공부 목표 시간"
         android:textSize="18sp" />
 
+    <!-- 목표 시간을 입력하기 위한 레이아웃 -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +25,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp">
 
+        <!-- 시간 입력 필드 -->
         <EditText
             android:id="@+id/et_goal_hours"
             android:layout_width="wrap_content"
@@ -35,6 +38,7 @@
             android:maxLength="2"
             android:ems="2"/>
 
+        <!-- 분 입력 필드 -->
         <EditText
             android:id="@+id/et_goal_minutes"
             android:layout_width="wrap_content"
@@ -48,6 +52,7 @@
             android:ems="2"/>
     </LinearLayout>
 
+    <!-- To-Do List 제목 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +62,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"/>
 
+    <!-- 투두리스트 아이템 추가 버튼 -->
     <Button
         android:id="@+id/btn_add_todo"
         android:layout_width="64dp"
@@ -67,6 +73,7 @@
         android:text="+"
         android:textColor="@color/colorPrimary" />
 
+    <!-- 투두리스트 아이템을 포함할 레이아웃 -->
     <LinearLayout
         android:id="@+id/todo_list"
         android:layout_width="match_parent"
@@ -74,6 +81,7 @@
         android:orientation="vertical"
         android:padding="16dp"/>
 
+    <!-- 장기 계획을 위한 제목 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +91,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"/>
 
+    <!-- 장기 계획을 입력할 필드 -->
     <EditText
         android:id="@+id/et_long_term_plans"
         android:layout_width="match_parent"

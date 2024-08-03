@@ -14,21 +14,25 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- 목표 시간을 표시하는 텍스트뷰 -->
         <TextView
-        android:id="@+id/tv_goal_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="오늘 공부 목표 시간"
-        android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_gravity="center_horizontal"/>
+            android:id="@+id/tv_goal_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘 공부 목표 시간"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"/>
 
+        <!-- 목표 시간 입력을 위한 레이아웃 -->
         <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp">
+
+            <!-- 시간 입력 필드 -->
             <EditText
                 android:id="@+id/et_goal_hours"
                 style="@style/EditTextStyle"
@@ -41,6 +45,7 @@
                 android:maxLength="2"
                 android:ems="2"/>
 
+            <!-- 분 입력 필드 -->
             <EditText
                 android:id="@+id/et_goal_minutes"
                 style="@style/EditTextStyle"
@@ -54,15 +59,17 @@
 
         </LinearLayout>
 
+        <!-- 투두리스트 제목 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To-Do List"
+            android:text="to-do 리스트"
             android:textSize="18sp"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"/>
 
+        <!-- 투두리스트 항목 추가 버튼 -->
         <Button
             android:id="@+id/btn_add_todo"
             android:layout_width="54dp"
@@ -74,35 +81,36 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FFFFFF" />
 
+        <!-- 투두리스트 항목을 포함할 레이아웃 -->
         <LinearLayout
             android:id="@+id/todo_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"/>
-        
+
+        <!-- 장기 계획을 위한 제목 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long-Term Plans"
+            android:text="장기 계획"
             android:textSize="18sp"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"/>
 
+        <!-- 장기 계획을 입력할 필드 -->
         <EditText
             android:id="@+id/et_long_term_plans"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your long-term plans here"
+            android:hint="자유롭게 작성해주세요."
             android:inputType="textMultiLine"
             android:layout_marginTop="8dp"
             android:padding="16dp"
             android:minHeight="200dp"
             android:textColor="@color/textColorPrimary"/>
 
-
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
