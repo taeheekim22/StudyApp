@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etUpdateName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="새 이름 입력" />
+
+    <EditText
+        android:id="@+id/etUpdatePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="새 비밀번호 입력"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"/>
+
+    <Spinner
+        android:id="@+id/spinnerUpdateDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

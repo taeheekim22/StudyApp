@@ -79,7 +79,8 @@
                     android:layout_marginBottom="34dp"
                     android:layout_marginLeft="8dp"
                     android:text="비밀번호"
-                    android:textSize="18sp"  />
+                    android:textSize="18sp"
+                    android:hint="6자리 이상 입력"/>
 
                 <EditText
                     android:id="@+id/etPassword"
