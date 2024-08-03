@@ -8,13 +8,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var etName: EditText
-    private lateinit var spinnerDepartment: Spinner
-    private lateinit var btnRegister: Button
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
+    private lateinit var etEmail: EditText //이메일 입력
+    private lateinit var etPassword: EditText //비밀번호 입력
+    private lateinit var etName: EditText //이름 입력
+    private lateinit var spinnerDepartment: Spinner //학과 선택
+    private lateinit var btnRegister: Button //회원가입 버튼
+    private lateinit var auth: FirebaseAuth //파이어베이스 인증
+    private lateinit var db: FirebaseFirestore //파이어베이스 데이터베이스
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         // 어댑터를 스피너에 적용
         spinnerDepartment.adapter = adapter
 
+        //변수 연결
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         etName = findViewById(R.id.etName)
@@ -38,21 +39,26 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
+        //회원가입 버튼 clicklistner
         btnRegister.setOnClickListener {
             register()
         }
     }
 
+    //회원가입
     private fun register() {
+        //입력된 이메일, 비밀번호, 이름, 학과 가져오기
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
         val name = etName.text.toString().trim()
         val department = spinnerDepartment.selectedItem.toString()
 
+        //모든 필드 입력되었나 확인하기
         if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        //회원가입 성공할 때
                         val user = auth.currentUser
                         val userInfo = hashMapOf(
                             "name" to name,
@@ -62,23 +68,26 @@ class RegisterActivity : AppCompatActivity() {
                             db.collection("users").document(it.uid)
                                 .set(userInfo)
                                 .addOnSuccessListener {
-                                    showToast("회원가입 성공")
+                                    showToast("회원가입에 성공!")
                                     startActivity(Intent(this, LoginActivity::class.java))
-                                    finish() // 현재 액티비티 종료
+                                    finish() //액티비티 종료
                                 }
                                 .addOnFailureListener {
-                                    showToast("회원정보 저장 실패: ${it.message}")
+                                    showToast("회원정보 저장에 실패하였습니다: ${it.message}")
                                 }
                         }
                     } else {
-                        showToast("회원가입 실패: ${task.exception?.message}")
+                        //회원가입 실패
+                        showToast("회원가입에 실패하였습니다: ${task.exception?.message}")
                     }
                 }
         } else {
-            showToast("모든 필드를 입력하세요")
+            //모든 필드 입력이 안되었을 때
+            showToast("모든 필드를 입력하세요!")
         }
     }
 
+    //토스트 메시지 함수
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

@@ -10,13 +10,15 @@ class TitleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
-
+        //Handler 생성하여 나중에 호출되게 함
         Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            // 앱의 main activity로 넘어가기
+            //Intent 생성하여 LoginActivity로 이동
             val i = Intent(this@TitleActivity, LoginActivity::class.java)
+            //액티비티 시작
             startActivity(i)
-            // 현재 액티비티 닫기
+            //액티비티 종료
             finish()
+            //1초 후에 실행되도록 하기
         }, 1000)
     }
 }
