@@ -4,27 +4,29 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp"
-
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:gravity="center_vertical">
 
+    <!-- 할 일을 체크할 수 있는 체크박스 -->
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/colorPrimary"/>
 
+    <!-- 할 일 내용을 입력할 수 있는 에디트텍스트 -->
     <EditText
         android:id="@+id/et_todo_task"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Enter task"
+        android:hint="할 일을 작성해주세요."
         android:background="@drawable/edit_text_background"
         android:padding="8dp"
         android:textColor="@color/textColorPrimary"/>
 
+    <!-- 할 일 항목을 삭제할 수 있는 버튼 -->
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="54dp"
@@ -36,4 +38,3 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF" />
 </LinearLayout>
-

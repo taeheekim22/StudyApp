@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- '정보'에 대한 체크박스 옵션들 -->
+    <!-- '정보보호학과' 졸업요건 체크박스 옵션들 -->
     <string-array name="정보보호학과">
         <item>인턴 트랙 OR 자격증 트랙</item>
         <item>Guru 1 이수</item>
@@ -10,7 +10,7 @@
         <item>1인 1 SW 지적재산권 취득(SW등록/ 논문/ 특허출원)</item>
     </string-array>
 
-    <!-- '소융'에 대한 체크박스 옵션들 -->
+    <!-- '소프트웨어융합학과' 졸업요건 체크박스 옵션들 -->
     <string-array name="소프트웨어융합학과">
         <item>공인외국어 성적 인증</item>
         <item>취업준비 프로그램 이수 인증</item>
