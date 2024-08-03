@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var spinner2: Spinner
-    private lateinit var textview7: TextView
+    private lateinit var tvinfo: TextView
     private lateinit var checkboxContainer: LinearLayout
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Initialize views
         spinner2 = view.findViewById(R.id.spinner2)
-        textview7 = view.findViewById(R.id.textView7)
+        tvinfo = view.findViewById(R.id.tvinfo)
         checkboxContainer = view.findViewById(R.id.checkbox_container)
 
         ArrayAdapter.createFromResource(
@@ -45,7 +45,7 @@ class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
         id: Long
     ) {
         val selectedItem = parent?.getItemAtPosition(position).toString()
-        textview7.text = selectedItem
+            tvinfo.text = selectedItem
 
         // Clear previous checkboxes
         checkboxContainer.removeAllViews()
@@ -66,7 +66,7 @@ class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        textview7.text = ""
+        tvinfo.text = ""
         checkboxContainer.removeAllViews()
     }
 
