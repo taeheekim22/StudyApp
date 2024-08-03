@@ -54,13 +54,23 @@ class ChatFragment : Fragment() {
                 // 데이터가 변경되면 ListView 업데이트
                 postAdapter.clear() // 기존 데이터 제거
                 postKeys.clear() // 게시물 키 리스트 초기화
+
+                val posts = mutableListOf<Post>()
+                val postKeyList = mutableListOf<String>()
+
                 for (postSnapshot in snapshot.children) {
                     // 각 게시물 데이터 가져오기
                     val post = postSnapshot.getValue(Post::class.java)
                     if (post != null) {
-                        postAdapter.add(post.title) // 제목 추가
-                        postKeys.add(postSnapshot.key ?: "") // 게시물 키 추가
+                        posts.add(post)
+                        postKeyList.add(postSnapshot.key ?: "")
                     }
+                }
+
+                // 최신 게시물이 맨 위에 오도록 역순으로 추가
+                for (i in posts.indices.reversed()) {
+                    postAdapter.add(posts[i].title)
+                    postKeys.add(postKeyList[i])
                 }
             }
 
