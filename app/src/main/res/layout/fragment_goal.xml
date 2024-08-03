@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/white"
+    android:background="#f8f4ef"
     tools:context=".GoalFragment">
 
     <LinearLayout
@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오늘 공부 목표 시간"
+            android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/colorPrimary"
             android:layout_gravity="center_horizontal"/>
 
         <!-- 목표 시간 입력을 위한 레이아웃 -->
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="20dp">
 
             <!-- 시간 입력 필드 -->
             <EditText
@@ -42,8 +42,10 @@
                 android:inputType="number"
                 android:layout_marginEnd="8dp"
                 android:textColor="@color/textColorPrimary"
+                android:background="#d0c3b1"
                 android:maxLength="2"
-                android:ems="2"/>
+                android:ems="2"
+                android:gravity="center"/>
 
             <!-- 분 입력 필드 -->
             <EditText
@@ -54,8 +56,10 @@
                 android:hint="MM"
                 android:inputType="number"
                 android:textColor="@color/textColorPrimary"
+                android:background="#d0c3b1"
                 android:maxLength="2"
-                android:ems="2"/>
+                android:ems="2"
+                android:gravity="center"/>
 
         </LinearLayout>
 
@@ -64,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="to-do 리스트"
+            android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"/>
 
         <!-- 투두리스트 항목 추가 버튼 -->
@@ -76,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#E4A5B3"
+            android:backgroundTint="#b4a896"
             android:text="+"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FFFFFF" />
@@ -94,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="장기 계획"
+            android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/colorPrimary"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_horizontal"/>
 
@@ -110,6 +114,7 @@
             android:layout_marginTop="8dp"
             android:padding="16dp"
             android:minHeight="200dp"
+            android:background="#d0c3b1"
             android:textColor="@color/textColorPrimary"/>
 
     </LinearLayout>

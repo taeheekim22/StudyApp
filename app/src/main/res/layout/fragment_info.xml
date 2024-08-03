@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
+    android:background="#f8f4ef"
     android:orientation="vertical"
     tools:context=".InfoFragment">
 
@@ -14,13 +14,16 @@
         android:layout_height="56dp"
         android:baselineAligned="false"
         android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:text="졸업요건"
+        android:textStyle="bold"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/spinnerarray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="9dp"
         android:text="학과 선택" />
 
     <Spinner
@@ -28,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         />
 
     <ScrollView

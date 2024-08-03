@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f8f4ef"
     android:padding="16dp">
 
     <!--글 제목-->
@@ -86,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@android:color/white"
+        android:background="#f8f4ef"
         android:padding="8dp">
 
         <!--댓글 작성 칸-->
@@ -102,7 +103,8 @@
             android:id="@+id/btnSubmitComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#E4A5B3"
+            android:backgroundTint="#b4a896"
+            android:padding="5dp"
             android:text="확인" />
     </LinearLayout>
 
@@ -113,7 +115,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:backgroundTint="#E4A5B3"
+        android:backgroundTint="#b4a896"
+        android:padding="5dp"
         android:text="글 삭제"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

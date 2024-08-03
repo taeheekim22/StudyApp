@@ -20,13 +20,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavi)
 
         // 사용자 인증 상태 확인
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
         val user: FirebaseUser? = auth.currentUser
+
+        // 사용자가 로그인하지 않았으면 로그인 화면으로 리디렉션
+        if (user == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        // 로그인이 되어 있을 때만 MainActivity 로드
+        setContentView(R.layout.activity_main)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavi)
+
+        // 사용자 정보 가져오기 (사용자 이름 등)
         val username = intent.getStringExtra("username")
 
         // 프래그먼트 초기화

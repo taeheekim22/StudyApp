@@ -6,14 +6,14 @@
     android:padding="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="#f8f4ef">
 
     <!-- 할 일을 체크할 수 있는 체크박스 -->
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="@color/colorPrimary"/>
+        android:layout_height="wrap_content" />
 
     <!-- 할 일 내용을 입력할 수 있는 에디트텍스트 -->
     <EditText
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="할 일을 작성해주세요."
-        android:background="@drawable/edit_text_background"
+        android:background="#d0c3b1"
         android:padding="8dp"
         android:textColor="@color/textColorPrimary"/>
 
@@ -33,7 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#E4A5B3"
+        android:backgroundTint="#b4a896"
+        android:padding="5dp"
         android:text="-"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF" />

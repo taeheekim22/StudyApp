@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f8f4ef"
     tools:context=".GoalFragment">
 
     <!-- 오늘 공부 목표 시간을 표시하는 텍스트뷰 -->
@@ -13,8 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="오늘 공부 목표 시간"
+        android:textStyle="bold"
         android:textSize="18sp" />
 
     <!-- 목표 시간을 입력하기 위한 레이아웃 -->
@@ -30,13 +32,14 @@
             android:id="@+id/et_goal_hours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
+            android:background="#d0c3b1"
             android:hint="HH"
             android:inputType="number"
             android:layout_marginEnd="8dp"
             android:textColor="@color/textColorPrimary"
             android:maxLength="2"
-            android:ems="2"/>
+            android:ems="2"
+            android:gravity="center"/>
 
         <!-- 분 입력 필드 -->
         <EditText
@@ -45,11 +48,12 @@
             android:layout_height="wrap_content"
             android:hint="MM"
             android:inputType="number"
-            android:background="@drawable/edit_text_background"
+            android:background="#d0c3b1"
             android:padding="8dp"
             android:textColor="@color/textColorPrimary"
             android:maxLength="2"
-            android:ems="2"/>
+            android:ems="2"
+            android:gravity="center"/>
     </LinearLayout>
 
     <!-- To-Do List 제목 -->
@@ -57,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="To-Do List"
+        android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"/>
 
@@ -69,9 +73,9 @@
         android:layout_height="64dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#E4A5B3"
-        android:text="+"
-        android:textColor="@color/colorPrimary" />
+        android:backgroundTint="#b4a896"
+        android:padding="5dp"
+        android:text="+" />
 
     <!-- 투두리스트 아이템을 포함할 레이아웃 -->
     <LinearLayout
@@ -86,8 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Long-Term Plans"
+        android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"/>
 
@@ -98,10 +102,10 @@
         android:layout_height="wrap_content"
         android:hint="Enter your long-term plans here"
         android:inputType="textMultiLine"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:padding="16dp"
         android:minHeight="200dp"
-        android:background="@drawable/edit_text_background"
+        android:background="#d0c3b1"
         android:textColor="@color/textColorPrimary"/>
 
 </LinearLayout>

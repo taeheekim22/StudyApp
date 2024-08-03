@@ -57,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
                             putExtra("username", user?.email)
                         }
                         startActivity(intent)
+                        finish() //로그인 후 액티비티 종료
                     } else {
                         showToast("이메일 또는 비밀번호를 다시 확인하세요!: ${task.exception?.message}")
                     }
