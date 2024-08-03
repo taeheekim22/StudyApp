@@ -1,9 +1,11 @@
 package com.example.studyapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
@@ -12,8 +14,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
-data class Post(val title: String = "", val content: String = "")
 
 class ChatFragment : Fragment() {
 
@@ -39,7 +39,7 @@ class ChatFragment : Fragment() {
             transaction.commit()
         }
 
-        val postAdapter = PostAdapter(requireContext(), ArrayList(), postKeys)
+        val postAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, ArrayList())
         postListView.adapter = postAdapter
 
         database.addValueEventListener(object : ValueEventListener {
@@ -49,18 +49,31 @@ class ChatFragment : Fragment() {
                 for (postSnapshot in snapshot.children) {
                     val post = postSnapshot.getValue(Post::class.java)
                     if (post != null) {
-                        postAdapter.add(post)
+                        postAdapter.add(post.title)
                         postKeys.add(postSnapshot.key ?: "")
                     }
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Log error message
+                // Handle error
             }
         })
+
+        postListView.setOnItemClickListener { _, _, position, _ ->
+            val postKey = postKeys[position]
+            Log.d("ChatFragment", "Post key clicked: $postKey")
+            val fragment = PostDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString("postKey", postKey)
+                }
+            }
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
 
         return view
     }
 }
-
