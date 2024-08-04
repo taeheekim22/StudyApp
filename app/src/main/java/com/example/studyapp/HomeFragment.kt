@@ -1,5 +1,6 @@
 package com.example.studyapp
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -50,6 +51,10 @@ class HomeFragment : Fragment() {
         finalSectv = view.findViewById(R.id.finalSectv)
         resetBtn = view.findViewById(R.id.resetBtn)
 
+        // 저장된 누적 시간을 복원
+        loadAccumulatedTime()
+        updateFinalTimeDisplay()
+
         // '시작/일시정지' 버튼 클릭 리스너
         startTime.setOnClickListener {
             try {
@@ -81,6 +86,7 @@ class HomeFragment : Fragment() {
             try {
                 // 누적 시간과 타이머 표시 리셋
                 accumulatedTime = 0
+                saveAccumulatedTime() // 누적 시간 저장
                 finalHourtv.text = "00 :"
                 finalMintv.text = "00 :"
                 finalSectv.text = "00"
@@ -93,6 +99,23 @@ class HomeFragment : Fragment() {
 
         return view
     }
+
+    private fun loadAccumulatedTime() {
+        val sharedPreferences = requireContext().getSharedPreferences("StudyAppPrefs", Context.MODE_PRIVATE)
+        accumulatedTime = sharedPreferences.getInt("accumulatedTime", 0)
+    }
+
+    private fun updateFinalTimeDisplay() {
+        val totalSeconds = accumulatedTime
+        val hours = totalSeconds / 3600
+        val minutes = (totalSeconds % 3600) / 60
+        val seconds = totalSeconds % 60
+
+        finalHourtv.text = String.format("%02d :", hours)
+        finalMintv.text = String.format("%02d :", minutes)
+        finalSectv.text = String.format("%02d", seconds)
+    }
+
 
     private fun start() {
         isRunning = true
@@ -133,6 +156,9 @@ class HomeFragment : Fragment() {
             // 현재 시간을 누적 시간에 추가
             accumulatedTime += time
 
+            // 누적 시간 SharedPreferences에 저장
+            saveAccumulatedTime()
+
             // 누적 시간 업데이트
             val totalSeconds = accumulatedTime
             val hours = totalSeconds / 3600
@@ -154,4 +180,12 @@ class HomeFragment : Fragment() {
             Log.e("HomeFragment", "Stop method error: ${e.message}", e)
         }
     }
+
+    private fun saveAccumulatedTime() {
+        val sharedPreferences = requireContext().getSharedPreferences("StudyAppPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("accumulatedTime", accumulatedTime)
+        editor.apply()
+    }
+
 }
