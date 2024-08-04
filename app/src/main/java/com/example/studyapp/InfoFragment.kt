@@ -1,5 +1,6 @@
 package com.example.studyapp
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,18 @@ class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var spinner2: Spinner//학과 선택
     private lateinit var tvinfo: TextView//선택학과
     private lateinit var checkboxContainer: LinearLayout//학과 선택 시 체크박스
+    private lateinit var sharedPreferences: SharedPreferences // SharedPreferences 객체
+    private lateinit var editor: SharedPreferences.Editor // SharedPreferences 편집기
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_info, container, false)
+
+        // SharedPreferences 초기화
+        sharedPreferences = requireActivity().getSharedPreferences("checkboxPrefs", 0)
+        editor = sharedPreferences.edit()
 
         //스피너, 텍스트 뷰, 체크박스 초기화
         spinner2 = view.findViewById(R.id.spinner2)
@@ -75,10 +82,14 @@ class InfoFragment : Fragment(), AdapterView.OnItemSelectedListener {
         checkboxContainer.removeAllViews()
     }
 
-    ///체크박스 추가
+    //체크박스 추가
     private fun addCheckbox(text: String) {
         val checkbox = CheckBox(context)
-        checkbox.text = text
-        checkboxContainer.addView(checkbox)
-    }
+        text.also { checkbox.text = it }
+        checkbox.isChecked = sharedPreferences.getBoolean(text, false)
+        checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            editor.putBoolean(text, isChecked)
+            editor.apply()
+        }
+        checkboxContainer.addView(checkbox)}
 }
