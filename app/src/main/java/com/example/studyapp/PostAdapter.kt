@@ -42,14 +42,14 @@ class PostAdapter(
         deleteButton.setOnClickListener {
             try {
                 database.child(postKey).removeValue().addOnSuccessListener {
-                    Toast.makeText(context, "Post deleted successfully.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "글이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener { e ->
-                    Toast.makeText(context, "Failed to delete post: ${e.message}", Toast.LENGTH_SHORT).show()
-                    Log.e("PostAdapter", "Error deleting post: ${e.message}", e)
+                    Toast.makeText(context, "글 삭제 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("PostAdapter", "글 삭제 실패: ${e.message}", e)
                 }
             } catch (e: Exception) {
-                Toast.makeText(context, "Error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("PostAdapter", "Error handling delete button click: ${e.message}", e)
+                Toast.makeText(context, "글 삭제 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("PostAdapter", "글 삭제 실패: ${e.message}", e)
             }
         }
 

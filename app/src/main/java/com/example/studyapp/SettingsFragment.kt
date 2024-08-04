@@ -54,6 +54,21 @@ class SettingsFragment : Fragment() {
         checkLoginStatus()
 
         //사용자 정보 가져오기
+        fetchUserInfo()
+
+        // 정보 업데이트 버튼 clicklistner
+        btnUpdateInfo.setOnClickListener {
+            showUpdateDialog()
+        }
+
+        // 로그아웃 버튼 clicklistner
+        btnLogout.setOnClickListener {
+            logout()
+        }
+    }
+
+    //사용자 정보 가져오는 함수
+    private fun fetchUserInfo() {
         val user = auth.currentUser
         user?.let {
             tvEmail.text = "이메일: ${it.email}"
@@ -68,16 +83,6 @@ class SettingsFragment : Fragment() {
                     // 실패 시 처리
                     showToast("사용자 정보를 가져오지 못했습니다: ${exception.message}")
                 }
-        }
-
-        // 정보 업데이트 버튼 clicklistner
-        btnUpdateInfo.setOnClickListener {
-            showUpdateDialog()
-        }
-
-        // 로그아웃 버튼 clicklistner
-        btnLogout.setOnClickListener {
-            logout()
         }
     }
 
@@ -137,46 +142,55 @@ class SettingsFragment : Fragment() {
                         if (task.isSuccessful) {
                             showToast("이름을 변경하였습니다!")
                             tvName.text = "이름: $newName"
+                            //FireStore 업데이트
+                            updates["name"]=newName
                         } else {
                             showToast("이름 변경에 실패하였습니다: ${task.exception?.message}")
                         }
+                        //FireStore 문서 업데이트
+                        updateFirestore(user.uid, newPassword, newDepartment, updates)
                     }
-            }
-
-            // 비밀번호 업데이트
-            if (newPassword.isNotEmpty()) {
-                it.updatePassword(newPassword)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            showToast("비밀번호를 변경하였습니다!")
-                        } else {
-                            showToast("비밀번호 변경에 실패하였습니다: ${task.exception?.message}")
-                        }
-                    }
-            }
-
-            // 학과 업데이트
-            if (newDepartment.isNotEmpty()) {
-                updates["department"] = newDepartment
-            }
-
-            // Firestore 문서 업데이트
-            if (updates.isNotEmpty()) {
-                db.collection("users").document(it.uid)
-                    .update(updates)
-                    .addOnSuccessListener {
-                        showToast("정보 변경 성공")
-                        refreshUserInfo() // UI 업데이트
-                    }
-                    .addOnFailureListener { e ->
-                        // Exception 객체 선언, 메시지를 출력
-                        showToast("정보 변경 실패: ${e.message}")
-                    }
+            } else {
+                // Firestore 문서 업데이트
+                updateFirestore(user.uid, newPassword, newDepartment, updates)
             }
         } ?: run {
             showToast("사용자 정보를 업데이트하는 동안 오류가 발생했습니다.")
         }
+            }
+
+    private fun updateFirestore(uid: String, newPassword: String, newDepartment: String, updates: MutableMap<String, Any>) {
+        // 비밀번호 업데이트
+        if (newPassword.isNotEmpty()) {
+            auth.currentUser?.updatePassword(newPassword)
+                ?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        showToast("비밀번호를 변경하였습니다!")
+                    } else {
+                        showToast("비밀번호 변경에 실패하였습니다: ${task.exception?.message}")
+                    }
+                }
+        }
+
+        // 학과 업데이트
+        if (newDepartment.isNotEmpty()) {
+            updates["department"] = newDepartment
+        }
+
+        // Firestore 문서 업데이트
+        if (updates.isNotEmpty()) {
+            db.collection("users").document(uid)
+                .update(updates)
+                .addOnSuccessListener {
+                    showToast("정보 변경 성공")
+                    fetchUserInfo() // UI 업데이트
+                }
+                .addOnFailureListener { e ->
+                    showToast("정보 변경 실패: ${e.message}")
+                }
+        }
     }
+
 
     // 사용자 정보 새로고침 함수
     private fun refreshUserInfo() {

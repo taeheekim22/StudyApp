@@ -53,23 +53,23 @@ class WriteFragment : Fragment() {
                     database.child(postId).setValue(post).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // 성공적으로 포스트가 저장되었을 때
-                            Toast.makeText(requireContext(), "Post submitted successfully.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "글이 등록되었습니다!", Toast.LENGTH_SHORT).show()
                             requireActivity().supportFragmentManager.popBackStack()
                         } else {
                             // 포스트 저장 실패 시
-                            Toast.makeText(requireContext(), "Failed to submit post: ${task.exception?.message}", Toast.LENGTH_LONG).show()
-                            Log.e("WriteFragment", "Post submission failed: ${task.exception?.message}", task.exception)
+                            Toast.makeText(requireContext(), "글 등록 실패: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                            Log.e("WriteFragment", "글 등록 실패: ${task.exception?.message}", task.exception)
                         }
                     }
                 }
             } catch (e: Exception) {
                 // 포스트 저장 중 오류 발생 시
-                Toast.makeText(requireContext(), "Error occurred: ${e.message}", Toast.LENGTH_LONG).show()
-                Log.e("WriteFragment", "Error occurred during post submission: ${e.message}", e)
+                Toast.makeText(requireContext(), "글 등록 실패: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e("WriteFragment", "글 등록 실패: ${e.message}", e)
             }
         } else {
             // 제목 또는 내용이 비어 있는 경우 사용자에게 알림
-            Toast.makeText(requireContext(), "Title and content cannot be empty.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "글이나 내용이 비어있습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 }
